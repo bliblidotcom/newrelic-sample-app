@@ -1,0 +1,18 @@
+---
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+rules:
+- pattern: 'Tomcat<type=ThreadPool, name="(\w+-\w+)-(\d+)"><>(currentThreadCount|currentThreadsBusy|keepAliveCount|pollerThreadCount|connectionCount|acceptorThreadCount|daemon|maxThreads):'
+  name: tomcat_threadpool_$3
+  labels:
+    port: "$2"
+    protocol: "$1"
+  help: Tomcat threadpool $3
+  type: GAUGE
+- pattern: 'Catalina<type=ThreadPool, name="(\w+-\w+)-(\d+)"><>(currentThreadCount|currentThreadsBusy|keepAliveCount|pollerThreadCount|connectionCount|acceptorThreadCount|daemon|maxThreads):'
+  name: tomcat_threadpool_$3
+  labels:
+    port: "$2"
+    protocol: "$1"
+  help: Tomcat threadpool $3
+  type: GAUGE
