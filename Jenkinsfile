@@ -1,6 +1,6 @@
 @Library('jenkins-ci-automation@master') _
 BlibliPipeline([
-  type: "java"
+  type: "java",
   test: [
           integration: [
               mongo: [
