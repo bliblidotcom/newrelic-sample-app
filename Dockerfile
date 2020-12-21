@@ -1,7 +1,7 @@
 FROM alpine:3.11
 
 ENV JAVA_ALPINE_VERSION=8.252.09-r0 \
-    NEWRELIC_VERSION=6.2.1 \
+    NEWRELIC_VERSION=6.3.0 \
     JMX_VERSION=0.12.0
 
 ENV NEWRELIC_DOWNLOAD_URL=https://download.newrelic.com/newrelic/java-agent/newrelic-agent/${NEWRELIC_VERSION}/newrelic-java-${NEWRELIC_VERSION}.zip \
