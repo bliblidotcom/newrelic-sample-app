@@ -75,7 +75,7 @@ public class CustomerController implements InitializingBean {
     value = "/api/customers/{customerId}",
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE
-  )spring.data.mongodb.username
+  )
   public Mono<Response<UpdateCustomerWebResponse>> update(MandatoryParameter mandatoryParameter,
                                                           @PathVariable("customerId") String customerId,
                                                           @RequestBody UpdateCustomerWebRequest request) {
