@@ -4,6 +4,8 @@ import com.blibli.oss.backend.command.executor.CommandExecutor;
 import com.blibli.oss.backend.command.model.binlist.GetBinListCommandRequest;
 import com.blibli.oss.backend.common.helper.ResponseHelper;
 import com.blibli.oss.backend.common.model.response.Response;
+import com.blibli.oss.backend.example.client.BinListNativeWebClient;
+import com.blibli.oss.backend.example.client.model.BinResponse;
 import com.blibli.oss.backend.example.command.binlist.GetBinListCommand;
 import com.blibli.oss.backend.example.web.model.response.binlist.GetBinListWebResponse;
 import com.blibli.oss.backend.reactor.scheduler.SchedulerHelper;
@@ -21,6 +23,10 @@ public class BinListController implements InitializingBean {
 
   @Autowired
   private CommandExecutor commandExecutor;
+
+
+  @Autowired
+  private BinListNativeWebClient binlistClient;
 
   @Autowired
   private SchedulerHelper schedulerHelper;
@@ -40,6 +46,16 @@ public class BinListController implements InitializingBean {
     return commandExecutor.execute(GetBinListCommand.class, toGetBinListCommandRequest(number))
       .map(ResponseHelper::ok)
       .subscribeOn(schedulerCommand);
+  }
+
+  @GetMapping(
+      value = "/binlist-webclient/{number}",
+      produces = MediaType.APPLICATION_JSON_VALUE
+  )
+  public Mono<Response<BinResponse>> lookupWebclient(@PathVariable("number") String number) {
+    return binlistClient.lookup(number)
+        .map(ResponseHelper::ok)
+        .subscribeOn(schedulerCommand);
   }
 
   private GetBinListCommandRequest toGetBinListCommandRequest(@PathVariable("number") String number) {
